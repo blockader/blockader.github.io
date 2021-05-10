@@ -5,17 +5,17 @@
   
 
   
-  <title>Hexo</title>
+  <title>Dense Token Supervision for Accelerating Transformer Training</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Dense Token Supervision for Accelerating Transformer Training">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Dense Token Supervision for Accelerating Transformer Training">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="16824 Team">
+<meta property="article:author" content="Shuqin Xie, Dongfeng Yu, Raymond Lau">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Dense Token Supervision for Accelerating Transformer Training" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -45,25 +45,32 @@
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/30/main/">Dense Token Supervision for Accelerating Transformer Training</a>
-    </h1>
-  
-
-        <a href="/2021/04/30/main/" class="article-date">
-  <time datetime="2021-05-01T00:07:45.780Z" itemprop="datePublished">2021-04-30</time>
-</a>
-      </header>
-    
     <div class="article-entry-abstract" itemprop="articleBody">
       
-        <!--<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>This is our project. It is great. This is our project. It is great. This is our project. It is great. This is our project. It is great. This is our project. It is great. This is our project. It is great. This is our project. It is great. This is our project. It is great. This is our project. It is great. This is our project. It is great. This is our project. It is great. This is our project. It is great. This is our project. It is great. This is our project. It is great.</p>
-<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>This is our method, with a picture.<br><img align="center" width="512" height="256" src="/images/grumpy_cat.jpg"></p>
-<div class="video-container"><iframe   src=https://www.youtube.com/embed/Ks_YPSJZAGE?rel=0&amp;showinfo=0 frameborder=0 gesture=media allow=encrypted-media allowfullscreen></iframe></div>
-<p><a href="/files/dense_token.zip">our code</a></p>
+        <!--<p><strong><h1 style="text-align:center;">Dense Token Supervision for Accelerating Transformer Training</h1></strong></p>
+<p style="text-align:center;">
+    Shuqin Xie, Dongfeng Yu, Raymond Lau
+    <br>
+    Carnegie Mellon University
+</p>
+
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><strong>Introduction</strong></h2><p>Transformer-based architectures are getting more and more attention in the computer vision field starting from its successful application in image classification[1]. Such architectures consider an image as a sequence of patches and use multiple layers of self-attention and MLP to generate representation for each token. Its token-wise nature raises the question of whether we can apply dense supervision on each of the token to serve purposes such as achieving better accuracy or more efficient training.<br><img align="center" width="1024" height="512" src="/images/transformer.png"><br>Our project explores this idea of dense token supervision for transformer on video action recognition and image classification tasks. We first consider the video action recognition task as the research interest in this area is gradually shifting to fine-grained action recogntion tasks to deal with the huge gap between the success of the state of the art action recogniton models and real-word applications. FineGym[2] is a fine-grained action recogniton dataset that provides multiple levels of supervision for a single video, which is pefectly suitable for our project as we can consider each frame as one token. We also consider the case for single image classification, where we use a pretrained teacher model to provide patch-wise supervision. Our results show that applying dense token supervision to transformers makes it easier for the model to converge to satifying accuracy (less sensensitive to the learning rate), and accelerates the training when trained from scratch.</p>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a><strong>Related Work</strong></h2><p>Add related work.</p>
+<h2 id="Video-Classification-with-Frame-level-Labels"><a href="#Video-Classification-with-Frame-level-Labels" class="headerlink" title="Video Classification with Frame-level Labels"></a><strong>Video Classification with Frame-level Labels</strong></h2><h3 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h3><p>Introduce FineGym.</p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>Introduce our model.<br><img align="center" width="1024" height="512" src="/images/video.png"></p>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><p>Show the results.</p>
+<h2 id="Image-Classification"><a href="#Image-Classification" class="headerlink" title="Image Classification"></a><strong>Image Classification</strong></h2><h3 id="Dataset-1"><a href="#Dataset-1" class="headerlink" title="Dataset"></a>Dataset</h3><p>Introduce ImageNet and Places365.</p>
+<h3 id="Model-1"><a href="#Model-1" class="headerlink" title="Model"></a>Model</h3><p>Introduce our model.<br><img align="center" width="1024" height="512" src="/images/image.png"></p>
+<h3 id="Results-1"><a href="#Results-1" class="headerlink" title="Results"></a>Results</h3><p>Show the results.<br><img align="center" width="1024" height="512" src="/images/pretrained.png"><br><img align="center" width="1024" height="512" src="/images/scratch.png"></p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a><strong>Conclusion</strong></h2><p>Give an overall conclusion, and talk about future steps.</p>
+<h2 id="Supplemental-Materials"><a href="#Supplemental-Materials" class="headerlink" title="Supplemental Materials"></a><strong>Supplemental Materials</strong></h2><h3 id="Presentation-Video"><a href="#Presentation-Video" class="headerlink" title="Presentation Video"></a>Presentation Video</h3><div class="video-container"><iframe   src=https://www.youtube.com/embed/Ks_YPSJZAGE?rel=0&amp;showinfo=0 frameborder=0 gesture=media allow=encrypted-media allowfullscreen></iframe></div>
+
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><p><a href="/files/dense_token.zip">dense_token.zip</a></p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a><strong>References</strong></h2><p>[1] Dosovitskiy, Alexey, et al. “An image is worth 16x16 words: Transformers for image recognition at scale.” arXiv preprint arXiv:2010.11929 (2020).<br>[2] Shao, Dian, et al. “Finegym: A hierarchical video dataset for fine-grained action understanding.” Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2020.</p>
+<h2 id="Todos"><a href="#Todos" class="headerlink" title="Todos"></a><strong>Todos</strong></h2><ol>
+<li>Add more content.</li>
+<li>Add more references.</li>
+</ol>
 -->
       
     </div>
@@ -86,7 +93,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2021 16824 Team<br>
+      &copy; 2021 Shuqin Xie, Dongfeng Yu, Raymond Lau<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> with 
       theme_by <a href="http://hexo.io/" target="_blank">mango</a>
     </div>
