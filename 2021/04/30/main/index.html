@@ -1,75 +1,153 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
 
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/null">
+  <link rel="icon" href="/null">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Shuqin Xie, Dongfeng Yu, Raymond Lau">
+  <meta name="keywords" content="">
   
   <title>Dense Token Supervision for Accelerating Transformer Training</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Dense Token Supervision for Accelerating Transformer Training      Shuqin Xie, Dongfeng Yu, Raymond Lau          Carnegie Mellon University   IntroductionTransformer-based architectures are getting mo">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Dense Token Supervision for Accelerating Transformer Training">
-<meta property="og:url" content="http://example.com/2021/04/30/main/index.html">
-<meta property="og:site_name" content="Dense Token Supervision for Accelerating Transformer Training">
-<meta property="og:description" content="Dense Token Supervision for Accelerating Transformer Training      Shuqin Xie, Dongfeng Yu, Raymond Lau          Carnegie Mellon University   IntroductionTransformer-based architectures are getting mo">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/images/transformer.png">
-<meta property="og:image" content="http://example.com/images/video.png">
-<meta property="og:image" content="http://example.com/images/image.png">
-<meta property="og:image" content="http://example.com/images/pretrained.png">
-<meta property="og:image" content="http://example.com/images/scratch.png">
-<meta property="article:published_time" content="2021-05-01T00:46:25.000Z">
-<meta property="article:modified_time" content="2021-05-11T00:52:32.436Z">
-<meta property="article:author" content="Shuqin Xie, Dongfeng Yu, Raymond Lau">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/transformer.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Dense Token Supervision for Accelerating Transformer Training" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700&amp;subset=korean" rel="stylesheet">
-  
-<link rel="stylesheet" href="/css/style.css">
 
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-</header>
 
-      <div class="outer">
-        <section id="main"><article id="post-main" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
+<body>
+  <header style="height: 16vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>
+        Dense Token Supervision for Accelerating Transformer Training
+      </strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
   </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/images/true_transformer.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+                
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
       
-        <p><strong><h1 style="text-align:center;">Dense Token Supervision for Accelerating Transformer Training</h1></strong></p>
+        
+</div>
+
+<div class="mt-1">
+  
+
+        
+
+              
+                
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <p><strong><h2 style="text-align:center;">Dense Token Supervision for Accelerating Transformer Training</h2></strong></p>
 <p style="text-align:center;">
     Shuqin Xie, Dongfeng Yu, Raymond Lau
     <br>
     Carnegie Mellon University
 </p>
 
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><strong>Introduction</strong></h2><p>Transformer-based architectures are getting more and more attention in the computer vision field starting from its successful application in image classification[1]. Such architectures consider an image as a sequence of patches and use multiple layers of self-attention and MLP to generate representation for each token. Its token-wise nature raises the question of whether we can apply dense supervision on each of the token to serve purposes such as achieving better accuracy or more efficient training.<br><img align="center" width="1024" height="512" src="/images/transformer.png"><br>Our project explores this idea of dense token supervision for transformer on video action recognition and image classification tasks. We first consider the video action recognition task as the research interest in this area is gradually shifting to fine-grained action recogntion tasks to deal with the huge gap between the success of the state of the art action recogniton models and real-word applications. FineGym[2] is a fine-grained action recogniton dataset that provides multiple levels of supervision for a single video, which is pefectly suitable for our project as we can consider each frame as one token. We also consider the case for single image classification, where we use a pretrained teacher model to provide patch-wise supervision. Our results show that applying dense token supervision to transformers makes it easier for the model to converge to satifying accuracy (less sensensitive to the learning rate), and accelerates the training when trained from scratch.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><strong>Introduction</strong></h2><p>Transformer-based architectures are getting more and more attention in the computer vision field starting from its successful application in image classification[1]. Such architectures consider an image as a sequence of patches and use multiple layers of self-attention and MLP to generate representation for each token. Its token-wise nature raises the question of whether we can apply dense supervision on each of the token to serve purposes such as achieving better accuracy or more efficient training.<br><img align="center" width="1024" height="512" src="/images/transformer.png" srcset="/img/loading.gif" lazyload><br>Our project explores this idea of dense token supervision for transformer on video action recognition and image classification tasks. We first consider the video action recognition task as the research interest in this area is gradually shifting to fine-grained action recogntion tasks to deal with the huge gap between the success of the state of the art action recogniton models and real-word applications. FineGym[2] is a fine-grained action recogniton dataset that provides multiple levels of supervision for a single video, which is pefectly suitable for our project as we can consider each frame as one token. We also consider the case for single image classification, where we use a pretrained teacher model to provide patch-wise supervision. Our results show that applying dense token supervision to transformers makes it easier for the model to converge to satifying accuracy (less sensensitive to the learning rate), and accelerates the training when trained from scratch.</p>
 <h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a><strong>Related Work</strong></h2><p><strong>Vision Transformer</strong> DeTR [3] combines transformer and CNN for object detection, achieving comparable performance with mature detection algorithms.<br>ViT [1] divides an image to 16 x 16 words and successfully uses a transformer to classify the image. DeiT [4] improves ViT’s data efficiency by distill knowledge from a CNN. [5] extends ViT to action recognition.<br><strong>Action Recognition</strong> Video action recognition models pre-dict the label (action) of a given video. Instead of using 3D convolution neural networks [6], which is simple yet com-putationally expensive, recent works [7, 8, 9] utilize 2D CNNs as the frame-wise feature extractor, combined with acarefully designed temporal model.<br><strong>Fine-grained Action Recognition</strong> Having achieved high performance on classical datasets, the area of action recognition shifts to the fine-grained ones [2,8],  where some classes are similar in context and different in only sub-action level, and the models have to learn robust spatial andtemporal features to solve the task. Existing work [11] applies semi-supervised learning and attention-based feature aggregation to better address the hard datasets.  </p>
 <h2 id="Video-Classification-with-Frame-level-Labels"><a href="#Video-Classification-with-Frame-level-Labels" class="headerlink" title="Video Classification with Frame-level Labels"></a><strong>Video Classification with Frame-level Labels</strong></h2><h3 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h3><p><strong>FineGym</strong> [2] is an action recognition dataset that provides coarse-to-fine annotations with its three levels of labels. It is built on top of gymnastic videos available on YouTube. The top level corresponds to events, such as balance-beam or uneven-bars, and the second level and the third level describe the sub-actions with decreasing granularity. The richness, quality and diversity of this dataset propose new challenges to the area.</p>
-<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>Introduce our model.<br><img align="center" width="1024" height="512" src="/images/video.png"></p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>Introduce our model.<br><img align="center" width="1024" height="512" src="/images/video.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><p>Show the results.</p>
 <h2 id="Image-Classification"><a href="#Image-Classification" class="headerlink" title="Image Classification"></a><strong>Image Classification</strong></h2><h3 id="Dataset-1"><a href="#Dataset-1" class="headerlink" title="Dataset"></a>Dataset</h3><p>Introduce ImageNet and Places365.</p>
-<h3 id="Model-1"><a href="#Model-1" class="headerlink" title="Model"></a>Model</h3><p>Introduce our model.<br><img align="center" width="1024" height="512" src="/images/image.png"></p>
-<h3 id="Results-1"><a href="#Results-1" class="headerlink" title="Results"></a>Results</h3><p>Show the results.<br><img align="center" width="1024" height="512" src="/images/pretrained.png"><br><img align="center" width="1024" height="512" src="/images/scratch.png"></p>
+<h3 id="Model-1"><a href="#Model-1" class="headerlink" title="Model"></a>Model</h3><p>Introduce our model.<br><img align="center" width="1024" height="512" src="/images/image.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Results-1"><a href="#Results-1" class="headerlink" title="Results"></a>Results</h3><p>Show the results.<br><img align="center" width="1024" height="512" src="/images/pretrained.png" srcset="/img/loading.gif" lazyload><br><img align="center" width="1024" height="512" src="/images/scratch.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a><strong>Conclusion</strong></h2><p>Give an overall conclusion, and talk about future steps.</p>
 <h2 id="Supplemental-Materials"><a href="#Supplemental-Materials" class="headerlink" title="Supplemental Materials"></a><strong>Supplemental Materials</strong></h2><h3 id="Presentation-Video"><a href="#Presentation-Video" class="headerlink" title="Presentation Video"></a>Presentation Video</h3><div class="video-container"><iframe   src=https://www.youtube.com/embed/Ks_YPSJZAGE?rel=0&amp;showinfo=0 frameborder=0 gesture=media allow=encrypted-media allowfullscreen></iframe></div>
 
@@ -80,49 +158,191 @@
 <li>Add more references.</li>
 </ol>
 
-      
-    </div>
-  </div>
-  
-    
-  
-</article>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-</section>
+            
+          </article>
+        </div>
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2021 Shuqin Xie, Dongfeng Yu, Raymond Lau<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> with 
-      theme_by <a href="http://hexo.io/" target="_blank">mango</a>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header">&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
   </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-</nav>
+</div>
+
+<!-- Custom -->
+
+
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
   </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.2/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
 </body>
 </html>
